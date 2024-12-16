@@ -1,0 +1,33 @@
+{
+  "name": "@example/nextjs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "clean": "rm -rf .next",
+    "dev": "next dev -p 3002",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@repo/shared": "workspace:*",
+    "next": "^15.1.0",
+    "nextjs-darkmode": "^1.0.7",
+    "nextjs-themes": "^4.0.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-mouse-trails": "^0.0.4",
+    "react18-loaders": "workspace:*",
+    "webgl-generative-particles": "^0.0.1"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.1.0",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.7.2"
+  }
+}
