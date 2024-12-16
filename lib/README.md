@@ -2,86 +2,166 @@
 
 [![test](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/react18-tools/esbuild-raw-plugin/maintainability) [![codecov](https://codecov.io/gh/react18-tools/esbuild-raw-plugin/graph/badge.svg)](https://codecov.io/gh/react18-tools/esbuild-raw-plugin) [![Version](https://img.shields.io/npm/v/esbuild-raw-plugin.svg?colorB=green)](https://www.npmjs.com/package/esbuild-raw-plugin) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/esbuild-raw-plugin.svg)](https://www.npmjs.com/package/esbuild-raw-plugin) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/esbuild-raw-plugin) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
-Esbuild Raw Plugin is a comprehensive library designed to unlock the full potential of React 18 server components. It provides customizable loading animation components and a fullscreen loader container, seamlessly integrating with React and Next.js.
+**An ESBuild/TSUP plugin to import files as raw text.**  
+Ideal for scenarios like importing code files for documentation, interactive tools like `react-live`, or other text-based use cases.
 
-✅ Fully Treeshakable (import from `esbuild-raw-plugin/client/loader-container`)
+> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/react18-tools/esbuild-raw-plugin) and share it with your friends.
 
-✅ Fully TypeScript Supported
+---
 
-✅ Leverages the power of React 18 Server components
+## Features
 
-✅ Compatible with all React 18 build systems/tools/frameworks
+- Import any file (e.g., `.js`, `.ts`, `.css`, etc.) as raw text.
+- Works seamlessly with **ESBuild** and **TSUP**.
+- Perfect for documentation generators, live code editors, and similar tools.
 
-✅ Documented with [Typedoc](https://react18-tools.github.io/esbuild-raw-plugin) ([Docs](https://react18-tools.github.io/esbuild-raw-plugin))
+---
 
-✅ Examples for Next.js, Vite, and Remix
+## Installation
 
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please consider starring [this repository](https://github.com/react18-tools/esbuild-raw-plugin) and sharing it with your friends.
-
-## Getting Started
-
-### Installation
-
-```bash
-pnpm add esbuild-raw-plugin
-```
-
-**_or_**
+Using npm:
 
 ```bash
-npm install esbuild-raw-plugin
+npm install esbuild-raw-plugin --save-dev
 ```
 
-**_or_**
+Using yarn:
 
 ```bash
-yarn add esbuild-raw-plugin
+yarn add esbuild-raw-plugin --dev
 ```
 
-### Usage
+Using pnpm:
 
-Using loaders is straightforward.
+```bash
+pnpm add esbuild-raw-plugin --save-dev
+```
 
-```tsx
-import { Bars1 } from "esbuild-raw-plugin/dist/server/bars/bars1";
+---
 
-export default function MyComponent() {
-  return someCondition ? <Bars1 /> : <>Something else...</>;
+## Usage
+
+### ESBuild Configuration
+
+Add the plugin to your ESBuild configuration:
+
+```js
+import { build } from "esbuild";
+import { raw } from "esbuild-raw-plugin";
+
+build({
+  entryPoints: ["src/index.js"],
+  bundle: true,
+  outfile: "out.js",
+  plugins: [raw()],
+});
+```
+
+### TSUP Configuration
+
+Add the plugin to your TSUP configuration:
+
+```js
+import { defineConfig } from "tsup";
+import { raw } from "esbuild-raw-plugin";
+
+export default defineConfig({
+  entry: ["src/index.ts"],
+  outDir: "dist",
+  plugins: [raw()],
+});
+```
+
+---
+
+## IDE Setup for IntelliSense and Type Checking
+
+Add following to your declaration file. If you do not have one, create `declarations.d.ts` file and add following.
+
+```typescript
+declare module "*?raw" {
+  const value: string;
+  export default value;
 }
 ```
 
-For detailed API and options, refer to [the API documentation](https://react18-tools.github.io/esbuild-raw-plugin).
+## Importing Files as Raw Text
 
-**Using LoaderContainer**
+With the plugin enabled, you can import files as raw text directly:
 
-`LoaderContainer` is a fullscreen component. You can add this component directly in your layout and then use `useLoader` hook to toggle its visibility.
+```js
+import myCode from "./example.js?raw";
 
-```tsx
-// layout.tsx
-<LoaderContainer />
-	 ...
+console.log(myCode);
+// Outputs the content of 'example.js' as a string.
 ```
 
-```tsx
-// some other page or component
-import { useLoader } from "esbuild-raw-plugin/dist/hooks";
+### Supported File Types
 
-export default MyComponent() {
-	const { setLoading } = useLoader();
-	useCallback(()=>{
-		setLoading(true);
-		...do some work
-		setLoading(false);
-	}, [])
-	...
-}
+You can use `?raw` with any file type, including:
+
+- `.js`, `.ts`, `.jsx`, `.tsx`
+- `.css`, `.scss`
+- `.html`
+- `.md`
+- and more!
+
+---
+
+## Example Use Case
+
+### Live Code Preview with `react-live`
+
+```jsx
+import React from "react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import exampleCode from "./example.js?raw";
+
+const App = () => (
+  <LiveProvider code={exampleCode}>
+    <LiveEditor />
+    <LiveError />
+    <LivePreview />
+  </LiveProvider>
+);
+
+export default App;
 ```
+
+---
+
+## Why Use `esbuild-raw-plugin`?
+
+- Simplifies importing files as raw text for documentation and live previews.
+- Seamlessly integrates with modern build tools like ESBuild and TSUP.
+- Lightweight and easy to configure.
+
+---
+
+## Keywords
+
+`esbuild`, `esbuild-plugin`, `tsup-plugin`, `raw-text-import`, `import-as-text`, `file-loader`, `react-live`, `documentation-tools`, `frontend-tooling`
+
+---
+
+## Contributing
+
+Contributions are welcome!  
+Feel free to open issues or pull requests to improve the plugin.
+
+---
+
+Let me know if you'd like further tweaks! 🚀
+
+![Alt](https://repobeats.axiom.co/api/embed/1ae166ef108b33b36ceaa60be208a5dafce25c5c.svg "Repobeats analytics image")
+
+---
 
 ## License
 
 This library is licensed under the MPL-2.0 open-source license.
 
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please consider enrolling in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsoring](https://github.com/sponsors/mayank1513) our work.
+> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please enroll in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsor](https://github.com/sponsors/mayank1513) our work.
 
 <hr />
 
