@@ -38,48 +38,6 @@ npm install esbuild-raw-plugin
 yarn add esbuild-raw-plugin
 ```
 
-## Want Lite Version? [![npm bundle size](https://img.shields.io/bundlephobia/minzip/esbuild-raw-plugin-lite)](https://www.npmjs.com/package/esbuild-raw-plugin-lite) [![Version](https://img.shields.io/npm/v/esbuild-raw-plugin-lite.svg?colorB=green)](https://www.npmjs.com/package/esbuild-raw-plugin-lite) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/esbuild-raw-plugin-lite.svg)](https://www.npmjs.com/package/esbuild-raw-plugin-lite)
-
-```bash
-pnpm add esbuild-raw-plugin-lite
-```
-
-**or**
-
-```bash
-npm install esbuild-raw-plugin-lite
-```
-
-**or**
-
-```bash
-yarn add esbuild-raw-plugin-lite
-```
-
-> You need `r18gs` as a peer-dependency
-
-### Import Styles
-
-You can import styles globally or within specific components.
-
-```css
-/* globals.css */
-@import "esbuild-raw-plugin/dist";
-```
-
-```tsx
-// layout.tsx
-import "esbuild-raw-plugin/dist/index.css";
-```
-
-For selective imports:
-
-```css
-/* globals.css */
-@import "esbuild-raw-plugin/dist/client"; /** required if you are using LoaderContainer */
-@import "esbuild-raw-plugin/dist/server/bars/bars1";
-```
-
 ### Usage
 
 Using loaders is straightforward.
@@ -122,8 +80,6 @@ export default MyComponent() {
 ## License
 
 This library is licensed under the MPL-2.0 open-source license.
-
-
 
 > <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please consider enrolling in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsoring](https://github.com/sponsors/mayank1513) our work.
 
