@@ -74,6 +74,17 @@ export default defineConfig({
 
 ---
 
+## IDE Setup for IntelliSense and Type Checking
+
+Add following to your declaration file. If you do not have one, create `declarations.d.ts` file and add following.
+
+```typescript
+declare module "*?raw" {
+  const value: string;
+  export default value;
+}
+```
+
 ## Importing Files as Raw Text
 
 With the plugin enabled, you can import files as raw text directly:
