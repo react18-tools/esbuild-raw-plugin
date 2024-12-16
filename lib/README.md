@@ -123,8 +123,6 @@ export default MyComponent() {
 
 This library is licensed under the MPL-2.0 open-source license.
 
-
-
 > <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please consider enrolling in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsoring](https://github.com/sponsors/mayank1513) our work.
 
 <hr />
