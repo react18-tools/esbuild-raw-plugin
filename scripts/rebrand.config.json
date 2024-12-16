@@ -1,6 +1,6 @@
 {
+  "packageName": "esbuild-raw-plugin",
   "owner": "react18-tools",
-  "repo": "turborepo-template",
-  "packageName": "react18-loaders",
-  "title": "React 18 Loaders"
+  "repo": "esbuild-raw-plugin",
+  "title": "Esbuild Raw Plugin"
 }

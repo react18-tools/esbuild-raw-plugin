@@ -16,8 +16,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-mouse-trails": "^0.0.4",
-    "react18-loaders": "workspace:*",
-    "react18-themes": "^3.2.0"
+    "react18-loaders": "latest",
+    "react18-themes": "^3.2.0",
+    "esbuild-raw-plugin": "workspace:*"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
