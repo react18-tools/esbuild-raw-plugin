@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@repo/shared": "workspace:*",
+    "esbuild-raw-plugin": "workspace:*",
     "nextjs-darkmode": "^1.0.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-mouse-trails": "^0.0.4",
-    "react18-loaders": "latest",
-    "react18-themes": "^3.2.0",
-    "esbuild-raw-plugin": "workspace:*"
+    "react18-loaders": "^1.1.4",
+    "react18-themes": "^3.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
