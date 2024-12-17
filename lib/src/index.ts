@@ -38,7 +38,7 @@ export const raw: (options?: RawPluginOptions) => Plugin = options => ({
         namespace: "raw",
       };
     });
-    build.onLoad({ filter: /\?raw$/, namespace: "raw" }, async args => {
+    build.onLoad({ filter: /\?raw$/, namespace: "raw" }, args => {
       let filePath = args.pluginData;
       if (fs.lstatSync(filePath).isDirectory()) filePath += path.sep + "index";
       if (!fs.existsSync(filePath))
