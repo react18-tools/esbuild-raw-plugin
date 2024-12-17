@@ -96,6 +96,35 @@ console.log(myCode);
 // Outputs the content of 'example.js' as a string.
 ```
 
+### Good News:
+
+With the latest update, you no longer need to specify the file extension explicitly.
+
+```js
+import myCode from "./example?raw";
+```
+
+This works seamlessly! Additionally, if you're exporting from files like `index.tsx`, `index.jsx`, etc., you can simplify imports. For example, if your file path is `my-lib/index.ts`, you can import the raw content like this:
+
+```js
+import myCode from "./my-lib?raw";
+```
+
+### Extension Options (Optional)
+
+```ts
+export interface RawPluginOptions {
+  /**
+   * Extensions to check in order if the file does not exist.
+   * If it's a directory, the plugin will look for `dir/index.[ext]`.
+   * @defaultValue ["tsx", "ts", "jsx", "js", "mjs", "mts", "module.css", "module.scss", "css", "scss"]
+   *
+   * You can provide your own extensions to optimize build performance or extend the list based on your use case.
+   */
+  ext?: string[];
+}
+```
+
 ### Supported File Types
 
 You can use `?raw` with any file type, including:

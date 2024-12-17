@@ -3,9 +3,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 export interface RawPluginOptions {
-  /** Extensions to check in order if the file does not exist.
-   * If it is directory we check dir/index.[ext]
+  /**
+   * Extensions to check in order if the file does not exist.
+   * If it's a directory, the plugin will look for `dir/index.[ext]`.
    * @defaultValue ["tsx", "ts", "jsx", "js", "mjs", "mts", "module.css", "module.scss", "css", "scss"]
+   *
+   * You can provide your own extensions to optimize build performance or extend the list based on your use case.
    */
   ext?: string[];
 }
@@ -44,6 +47,10 @@ export const raw: (options?: RawPluginOptions) => Plugin = options => ({
             filePath += "." + e;
             break;
           }
+      if (!fs.existsSync(filePath))
+        throw new Error(
+          `File not found: ${args.pluginData}\nWe checked for following extensions: ${ext.join(", ")}. You can customise by passing {ext: [...]} to raw({ext:[...]})`,
+        );
       return {
         contents: fs.readFileSync(filePath, "utf8"),
         loader: "text",
