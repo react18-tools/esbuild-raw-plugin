@@ -49,7 +49,9 @@ export const raw: (options?: RawPluginOptions) => Plugin = options => ({
           }
       if (!fs.existsSync(filePath))
         throw new Error(
+          /* v8 ignore next */
           `File not found: ${args.pluginData}\nWe checked for following extensions: ${ext.join(", ")}. You can customise by passing {ext: [...]} to raw({ext:[...]})`,
+          /* v8 ignore next */
         );
       return {
         contents: fs.readFileSync(filePath, "utf8"),

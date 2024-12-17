@@ -32,4 +32,14 @@ describe("WebGL plugins", () => {
     const generatedCodeContent = (await import("./dist/test1.js")).getText();
     expect(fileContent).toBe(generatedCodeContent);
   });
+
+  test("throws error if no file is found", async ({ expect }) => {
+    let didThrow = false;
+    try {
+      await esbuild.build({ ...buildOptions, entryPoints: [path.resolve(__dirname, "test2.ts")] });
+    } catch (e) {
+      didThrow = true;
+    }
+    expect(didThrow).toBe(true);
+  });
 });
