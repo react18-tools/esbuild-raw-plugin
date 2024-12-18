@@ -40,7 +40,8 @@ export const raw: (options?: RawPluginOptions) => Plugin = options => ({
     });
     build.onLoad({ filter: /\?raw$/, namespace: "raw" }, args => {
       let filePath = args.pluginData;
-      if (fs.lstatSync(filePath).isDirectory()) filePath += path.sep + "index";
+      if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory())
+        filePath += path.sep + "index";
       if (!fs.existsSync(filePath))
         for (const e of ext)
           if (fs.existsSync(filePath + "." + e)) {
