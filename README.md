@@ -68,7 +68,7 @@ import { raw } from "esbuild-raw-plugin";
 export default defineConfig({
   entry: ["src/index.ts"],
   outDir: "dist",
-  plugins: [raw()],
+  esbuildPlugins: [raw()],
 });
 ```
 
