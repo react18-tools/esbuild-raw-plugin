@@ -1,4 +1,4 @@
-import { beforeAll, describe, test } from "vitest";
+import { describe, test } from "vitest";
 import esbuild, { BuildOptions } from "esbuild";
 import path from "node:path";
 import { raw } from "../src";
@@ -16,7 +16,7 @@ const buildOptions: BuildOptions = {
   plugins: [raw()],
 };
 
-describe("WebGL plugins", () => {
+describe("Raw plugin", () => {
   test("test raw import", async ({ expect }) => {
     await esbuild.build(buildOptions);
     const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"), "utf-8");
@@ -41,5 +41,30 @@ describe("WebGL plugins", () => {
       didThrow = true;
     }
     expect(didThrow).toBe(true);
+  });
+
+  test("textExtensions", async ({ expect }) => {
+    await esbuild.build({
+      ...buildOptions,
+      plugins: [raw({ textExtensions: [".md"] })],
+      entryPoints: [path.resolve(__dirname, "test3.ts")],
+    });
+
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "test.md"), "utf-8");
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist/test3.js")).getText();
+    expect(fileContent).toBe(generatedCodeContent);
+  });
+
+  test("custom loader", async ({ expect }) => {
+    await esbuild.build({
+      ...buildOptions,
+      entryPoints: [path.resolve(__dirname, "test-loader.ts")],
+      plugins: [raw({ loader: "base64" })],
+    });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"), "utf-8");
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist/test-loader.js")).getText();
+    expect(fileContent).toBe(atob(generatedCodeContent));
   });
 });
