@@ -68,7 +68,7 @@ import { raw } from "esbuild-raw-plugin";
 export default defineConfig({
   entry: ["src/index.ts"],
   outDir: "dist",
-  plugins: [raw()],
+  esbuildPlugins: [raw()],
 });
 ```
 
@@ -76,7 +76,7 @@ export default defineConfig({
 
 ## IDE Setup for IntelliSense and Type Checking
 
-Add following to your declaration file. If you do not have one, create `declarations.d.ts` file and add following.
+Add the following to your declaration file. If you do not have one, create a `declarations.d.ts` file and add the following:
 
 ```typescript
 declare module "*?raw" {
@@ -122,6 +122,17 @@ export interface RawPluginOptions {
    * You can provide your own extensions to optimize build performance or extend the list based on your use case.
    */
   ext?: string[];
+
+  /**
+   * Custom loader for file processing.
+   * @defaultValue "text"
+   */
+  loader?: "text" | "base64" | "dataurl" | "file" | "binary" | "default";
+
+  /**
+   * Extensions to be treated as text files.
+   */
+  textExtensions?: string[];
 }
 ```
 
