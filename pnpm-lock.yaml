@@ -82,7 +82,7 @@ importers:
         version: 0.0.5(@types/react@19.1.6)(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
       webgl-generative-particles:
         specifier: ^0.0.1
         version: 0.0.1(@types/react@19.1.6)(react@19.1.0)
@@ -131,7 +131,7 @@ importers:
         version: 0.0.5(@types/react@19.1.6)(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
       react18-themes:
         specifier: ^3.2.0
         version: 3.2.0(@types/react@19.1.6)(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
@@ -203,8 +203,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       eslint-plugin-storybook:
-        specifier: ^9.0.1
-        version: 9.0.1(eslint@9.11.1)(storybook@9.0.0(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3)
+        specifier: ^9.0.2
+        version: 9.0.2(eslint@9.11.1)(storybook@9.0.0(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3)
 
   packages/config-typescript: {}
 
@@ -233,7 +233,7 @@ importers:
         version: 4.1.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2632,12 +2632,12 @@ packages:
     peerDependencies:
       eslint: ^8.0.0
 
-  eslint-plugin-storybook@9.0.1:
-    resolution: {integrity: sha512-8WHL0K9c2SY3Ks4jEELQGu1jOJT311NqCN+8ppiKxNogzUUrEe0duaeSKCj6QA+IPtzXgHgbW7vVVk/mu3Nkqg==}
+  eslint-plugin-storybook@9.0.2:
+    resolution: {integrity: sha512-28qZeGW3K8zm7eNLBr2R/OyI3pn8UmrO5RSUOiAD5RNuEpgoSOBmyACyEu3FV7zSks1wV05tUyHUPIp44zmp9w==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       eslint: ^8.0.0
-      storybook: ^9.0.1
+      storybook: ^9.0.2
 
   eslint-plugin-testing-library@6.5.0:
     resolution: {integrity: sha512-Ls5TUfLm5/snocMAOlofSOJxNN0aKqwTlco7CrNtMjkTdQlkpSMaeTCDHCuXfzrI97xcx2rSCNeKeJjtpkNC1w==}
@@ -4350,8 +4350,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-packagejson@2.5.14:
-    resolution: {integrity: sha512-h+3tSpr2nVpp+YOK1MDIYtYhHVXr8/0V59UUbJpIJFaqi3w4fvUokJo6eV8W+vELrUXIZzJ+DKm5G7lYzrMcKQ==}
+  prettier-plugin-packagejson@2.5.15:
+    resolution: {integrity: sha512-2QSx6y4IT6LTwXtCvXAopENW5IP/aujC8fobEM2pDbs0IGkiVjW/ipPuYAHuXigbNe64aGWF7vIetukuzM3CBw==}
     peerDependencies:
       prettier: '>= 1.16.0'
     peerDependenciesMeta:
@@ -4948,10 +4948,6 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
-
-  synckit@0.11.6:
-    resolution: {integrity: sha512-2pR2ubZSV64f/vqm9eLPz/KOvR9Dm+Co/5ChLgeHl0yEDRc6h5hXHoxEQH8Y5Ljycozd3p1k5TTSVdzYGkPvLw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
 
   synckit@0.11.8:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
@@ -7170,7 +7166,7 @@ snapshots:
       eslint-plugin-tsdoc: 0.2.17
       eslint-plugin-unicorn: 51.0.1(eslint@9.11.1)
       eslint-plugin-vitest: 0.3.26(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.11.1)(typescript@5.8.3))(eslint@9.11.1)(typescript@5.8.3))(eslint@9.11.1)(typescript@5.8.3)(vitest@3.1.4(@types/debug@4.1.12)(@types/node@22.15.29)(jsdom@26.1.0)(sass@1.89.1)(yaml@2.8.0))
-      prettier-plugin-packagejson: 2.5.14(prettier@3.5.3)
+      prettier-plugin-packagejson: 2.5.15(prettier@3.5.3)
     optionalDependencies:
       '@next/eslint-plugin-next': 14.2.13
       eslint: 9.11.1
@@ -8312,7 +8308,7 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-storybook@9.0.1(eslint@9.11.1)(storybook@9.0.0(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3):
+  eslint-plugin-storybook@9.0.2(eslint@9.11.1)(storybook@9.0.0(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3):
     dependencies:
       '@typescript-eslint/utils': 8.33.0(eslint@9.11.1)(typescript@5.8.3)
       eslint: 9.11.1
@@ -10575,10 +10571,10 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-packagejson@2.5.14(prettier@3.5.3):
+  prettier-plugin-packagejson@2.5.15(prettier@3.5.3):
     dependencies:
       sort-package-json: 3.2.1
-      synckit: 0.11.6
+      synckit: 0.11.8
     optionalDependencies:
       prettier: 3.5.3
 
@@ -10681,7 +10677,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react18-loaders@1.1.4(@types/react@19.1.6)(next@15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0):
+  react18-loaders@1.1.4(@types/react@19.1.6)(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1))(react@19.1.0):
     dependencies:
       '@types/react': 19.1.6
       r18gs: 2.1.0(@types/react@19.1.6)(react@19.1.0)
@@ -11287,10 +11283,6 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   symbol-tree@3.2.4: {}
-
-  synckit@0.11.6:
-    dependencies:
-      '@pkgr/core': 0.2.4
 
   synckit@0.11.8:
     dependencies:
