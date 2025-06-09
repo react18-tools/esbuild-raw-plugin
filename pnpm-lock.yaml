@@ -2223,8 +2223,8 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  core-js-compat@3.42.0:
-    resolution: {integrity: sha512-bQasjMfyDGyaeWKBIu33lHh9qlSR0MFE/Nmc6nMjf/iU9b3rSMdAYz1Baxrv4lPdGUsTqZudHA4jIGSJy0SWZQ==}
+  core-js-compat@3.43.0:
+    resolution: {integrity: sha512-2GML2ZsCc5LR7hZYz4AXmjQw8zuy2T//2QntwdnpuYI7jteT6GVYJL7F6C2C57R7gSYrcqVW3lAALefdbhBLDA==}
 
   create-jest@29.7.0:
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==}
@@ -7799,7 +7799,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  core-js-compat@3.42.0:
+  core-js-compat@3.43.0:
     dependencies:
       browserslist: 4.25.0
 
@@ -8383,7 +8383,7 @@ snapshots:
       '@eslint/eslintrc': 2.1.4
       ci-info: 4.2.0
       clean-regexp: 1.0.0
-      core-js-compat: 3.42.0
+      core-js-compat: 3.43.0
       eslint: 9.11.1
       esquery: 1.6.0
       indent-string: 4.0.0
