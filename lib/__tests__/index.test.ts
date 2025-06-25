@@ -27,10 +27,24 @@ describe("Raw plugin", () => {
 
   test("test raw import with auto ext", async ({ expect }) => {
     await esbuild.build({ ...buildOptions, entryPoints: [path.resolve(__dirname, "test1.ts")] });
-    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"), "utf-8");
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
     // @ts-ignore
     const generatedCodeContent = (await import("./dist/test1.js")).getText();
-    expect(fileContent).toBe(generatedCodeContent);
+    // @ts-ignore
+    const generatedCodeContent2 = (await import("./dist/test1.js")).getText2();
+    expect(generatedCodeContent).toBe(fileContent.toString("base64"));
+    expect(generatedCodeContent2.toString("base64")).toBe(fileContent.toString("base64"));
+  });
+
+  test("test buffer", async ({ expect }) => {
+    await esbuild.build({ ...buildOptions, entryPoints: [path.resolve(__dirname, "test4.ts")] });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist/test4.js")).getBuffer();
+    // @ts-ignore
+    expect(Buffer.from(generatedCodeContent).toString("base64")).toBe(
+      fileContent.toString("base64"),
+    );
   });
 
   test("throws error if no file is found", async ({ expect }) => {
@@ -46,7 +60,7 @@ describe("Raw plugin", () => {
   test("textExtensions", async ({ expect }) => {
     await esbuild.build({
       ...buildOptions,
-      plugins: [raw({ textExtensions: [".md"] })],
+      plugins: [raw({ customLoaders: { md: "text" } })],
       entryPoints: [path.resolve(__dirname, "test3.ts")],
     });
 
@@ -56,15 +70,45 @@ describe("Raw plugin", () => {
     expect(fileContent).toBe(generatedCodeContent);
   });
 
+  test("uses custom loader if provided", async ({ expect }) => {
+    await esbuild.build({
+      ...buildOptions,
+      entryPoints: [path.resolve(__dirname, "test-loader.ts")],
+      plugins: [raw({ loader: "base64" })],
+      outdir: "__tests__/dist2",
+    });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist2/test-loader.js")).getText();
+    expect(generatedCodeContent).toBe(fileContent.toString("base64"));
+  });
+
+  test("uses customLoaders mapping for extension", async ({ expect }) => {
+    await esbuild.build({
+      ...buildOptions,
+      plugins: [raw({ customLoaders: { md: "text" } })],
+      entryPoints: [path.resolve(__dirname, "test3.ts")],
+      outdir: "__tests__/dist3",
+    });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "test.md"), "utf-8");
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist3/test3.js")).getText();
+    expect(generatedCodeContent).toBe(fileContent);
+  });
+
+  test("uses custom plugin name if provided", ({ expect }) => {
+    const plugin = raw({ name: "custom-plugin-name" });
+    expect(plugin.name).toBe("custom-plugin-name");
+  });
   test("custom loader", async ({ expect }) => {
     await esbuild.build({
       ...buildOptions,
       entryPoints: [path.resolve(__dirname, "test-loader.ts")],
       plugins: [raw({ loader: "base64" })],
     });
-    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"), "utf-8");
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
     // @ts-ignore
     const generatedCodeContent = (await import("./dist/test-loader.js")).getText();
-    expect(fileContent).toBe(atob(generatedCodeContent));
+    expect(generatedCodeContent).toBe(fileContent.toString("base64"));
   });
 });
