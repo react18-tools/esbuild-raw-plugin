@@ -30,7 +30,10 @@ describe("Raw plugin", () => {
     const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
     // @ts-ignore
     const generatedCodeContent = (await import("./dist/test1.js")).getText();
+    // @ts-ignore
+    const generatedCodeContent2 = (await import("./dist/test1.js")).getText2();
     expect(generatedCodeContent).toBe(fileContent.toString("base64"));
+    expect(generatedCodeContent2.toString("base64")).toBe(fileContent.toString("base64"));
   });
 
   test("throws error if no file is found", async ({ expect }) => {
