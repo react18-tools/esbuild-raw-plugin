@@ -36,6 +36,17 @@ describe("Raw plugin", () => {
     expect(generatedCodeContent2.toString("base64")).toBe(fileContent.toString("base64"));
   });
 
+  test("test buffer", async ({ expect }) => {
+    await esbuild.build({ ...buildOptions, entryPoints: [path.resolve(__dirname, "test4.ts")] });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist/test4.js")).getBuffer();
+    // @ts-ignore
+    expect(Buffer.from(generatedCodeContent).toString("base64")).toBe(
+      fileContent.toString("base64"),
+    );
+  });
+
   test("throws error if no file is found", async ({ expect }) => {
     let didThrow = false;
     try {
