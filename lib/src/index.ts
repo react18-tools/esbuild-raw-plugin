@@ -70,7 +70,7 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
     });
 
     build.onLoad({ filter: /.*/, namespace: "raw" }, args => {
-      let { fullPath, query } = args.pluginData;
+      const { fullPath, query } = args.pluginData;
       let filePath = fullPath;
 
       if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()) {
