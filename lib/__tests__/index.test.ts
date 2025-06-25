@@ -27,10 +27,10 @@ describe("Raw plugin", () => {
 
   test("test raw import with auto ext", async ({ expect }) => {
     await esbuild.build({ ...buildOptions, entryPoints: [path.resolve(__dirname, "test1.ts")] });
-    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"), "utf-8");
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "../src/index.ts"));
     // @ts-ignore
     const generatedCodeContent = (await import("./dist/test1.js")).getText();
-    expect(fileContent).toBe(generatedCodeContent);
+    expect(generatedCodeContent).toBe(fileContent.toString("base64"));
   });
 
   test("throws error if no file is found", async ({ expect }) => {
