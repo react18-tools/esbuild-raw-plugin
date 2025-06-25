@@ -2,7 +2,7 @@
   "name": "esbuild-raw-plugin",
   "author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "An ESBuild and TSUP plugin that allows importing files as raw text. Useful for loading code files in documentation, interactive demos, or tools like react-live.",
   "license": "MPL-2.0",
   "main": "./dist/index.js",

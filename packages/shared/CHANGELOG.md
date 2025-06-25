@@ -1,5 +1,12 @@
 # @repo/shared
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [a899336]
+  - esbuild-raw-plugin@0.3.0
+
 ## 0.0.3
 
 ### Patch Changes
