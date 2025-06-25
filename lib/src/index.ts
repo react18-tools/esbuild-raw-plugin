@@ -2,6 +2,19 @@ import type { Plugin, PluginBuild } from "esbuild";
 import fs from "node:fs";
 import path from "node:path";
 
+const DEFAULT_EXT_ORDER_LIST = [
+  "ts",
+  "tsx",
+  "js",
+  "jsx",
+  "mjs",
+  "mts",
+  "module.css",
+  "module.scss",
+  "css",
+  "scss",
+];
+
 export interface RawPluginOptions {
   /**
    * File extensions to check in order of priority if the specified file is missing.
@@ -29,67 +42,78 @@ export interface RawPluginOptions {
  * treating them as raw text content. It supports resolving file
  * extensions in order of priority and handling custom loaders.
  */
-export const raw: (options?: RawPluginOptions) => Plugin = options => ({
-  name: `esbuild-raw-plugin`,
+export const raw = (options?: RawPluginOptions): Plugin => ({
+  name: "esbuild-raw-plugin",
   setup(build: PluginBuild) {
-    const ext = options?.ext ?? [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "mjs",
-      "mts",
-      "module.css",
-      "module.scss",
-      "css",
-      "scss",
-    ];
+    const ext = options?.ext ?? DEFAULT_EXT_ORDER_LIST;
 
-    build.onResolve({ filter: /\?raw$/ }, args => ({
-      path: args.path,
-      pluginData: path.resolve(args.resolveDir, args.path).replace(/\?raw$/, ""),
-      namespace: "raw",
-    }));
+    build.onResolve({ filter: /\?(raw|text|buffer|binary|base64|dataurl|file)$/ }, args => {
+      const [filepath, query] = args.path.split("?");
+      return {
+        path: filepath,
+        namespace: "raw",
+        pluginData: {
+          fullPath: path.resolve(args.resolveDir, filepath),
+          query,
+        },
+      };
+    });
 
-    build.onLoad({ filter: /\?raw$/, namespace: "raw" }, args => {
-      let filePath = args.pluginData;
-      if (options?.loader && options.loader !== "text") {
-        return { contents: fs.readFileSync(filePath, "utf8"), loader: options.loader };
-      }
+    build.onLoad({ filter: /.*/, namespace: "raw" }, args => {
+      let { fullPath, query } = args.pluginData;
+      let filePath = fullPath;
 
       if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()) {
         filePath = path.join(filePath, "index");
       }
 
       if (!fs.existsSync(filePath)) {
-        for (const e of ext) {
-          if (fs.existsSync(`${filePath}.${e}`)) {
-            filePath += `.${e}`;
-            break;
-          }
+        const resolved = ext
+          .map(e => e.replace(/^\./, ""))
+          .find(e => fs.existsSync(`${filePath}.${e}`));
+        if (resolved) {
+          filePath += `.${resolved}`;
         }
       }
 
       if (!fs.existsSync(filePath)) {
         throw new Error(
-          /* v8 ignore next */
-          `File not found: ${args.pluginData}\nChecked extensions: ${ext.join(", ")}. You can customize this using { ext: [...] }.`,
-          /* v8 ignore next */
+          `File not found: ${fullPath}\nChecked extensions: ${ext.join(", ")}.\nYou can customize extensions list using { ext: [...] }.`,
         );
       }
 
-      return { contents: fs.readFileSync(filePath, "utf8"), loader: "text" };
+      const buffer = fs.readFileSync(filePath);
+      const suffix = query?.toLowerCase();
+
+      let loader = options?.loader ?? "text";
+      switch (suffix) {
+        case "text":
+          loader = "text";
+          break;
+        case "buffer":
+        case "binary":
+          loader = "binary";
+          break;
+        case "file":
+        case "base64":
+        case "dataurl":
+          loader = suffix;
+      }
+
+      return { contents: buffer, loader };
     });
 
     if (options?.textExtensions?.length) {
       build.onLoad(
         {
           filter: new RegExp(
-            `\.(${options.textExtensions.map(e => e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})$`,
+            `\\.(${options.textExtensions
+              .map(e => e.replace(/^\./, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+              .join("|")})$`,
           ),
         },
         args => ({
-          contents: fs.readFileSync(args.path, "utf8"),
+          contents: fs.readFileSync(args.path),
           loader: "text",
         }),
       );
