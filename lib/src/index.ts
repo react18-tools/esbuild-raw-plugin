@@ -25,6 +25,7 @@ export interface RawPluginOptions {
 
   /**
    * Custom loader for file processing.
+   * Overridden by import query suffix (?text, ?base64, etc).
    * @defaultValue "text"
    */
   loader?: "text" | "base64" | "dataurl" | "file" | "binary" | "default";
@@ -33,6 +34,11 @@ export interface RawPluginOptions {
    * Extensions to be treated as text files.
    */
   textExtensions?: string[];
+
+  /**
+   * Extension name in case you are using some other extension with conflicting names.
+   */
+  name?: string;
 }
 
 /**
@@ -43,12 +49,13 @@ export interface RawPluginOptions {
  * extensions in order of priority and handling custom loaders.
  */
 export const raw = (options?: RawPluginOptions): Plugin => ({
-  name: "esbuild-raw-plugin",
+  name: options?.name || "esbuild-raw-plugin",
   setup(build: PluginBuild) {
-    const ext = options?.ext ?? DEFAULT_EXT_ORDER_LIST;
+    const ext = options?.ext?.map(e => e.replace(/^\./, "")) ?? DEFAULT_EXT_ORDER_LIST;
 
     build.onResolve({ filter: /\?(raw|text|buffer|binary|base64|dataurl|file)$/ }, args => {
-      const [filepath, query] = args.path.split("?");
+      const query = args.path.split("?").pop();
+      const filepath = args.path.replace(new RegExp(`\\?${query}$`), "");
       return {
         path: filepath,
         namespace: "raw",
@@ -68,9 +75,7 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
       }
 
       if (!fs.existsSync(filePath)) {
-        const resolved = ext
-          .map(e => e.replace(/^\./, ""))
-          .find(e => fs.existsSync(`${filePath}.${e}`));
+        const resolved = ext.find(e => fs.existsSync(`${filePath}.${e}`));
         if (resolved) {
           filePath += `.${resolved}`;
         }
@@ -87,17 +92,20 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
 
       let loader = options?.loader ?? "text";
       switch (suffix) {
-        case "text":
-          loader = "text";
-          break;
         case "buffer":
         case "binary":
           loader = "binary";
           break;
+        case "text":
         case "file":
         case "base64":
         case "dataurl":
           loader = suffix;
+          break;
+        case "raw":
+          break;
+        default:
+          console.warn(`?${suffix} not supported. Falling back to ${loader}`);
       }
 
       return { contents: buffer, loader };
