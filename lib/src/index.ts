@@ -107,8 +107,6 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
           break;
         case "raw":
           break;
-        default:
-          console.warn(`?${suffix} not supported. Falling back to ${loader}`);
       }
 
       return { contents: buffer, loader };
