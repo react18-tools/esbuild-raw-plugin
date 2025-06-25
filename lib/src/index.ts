@@ -31,12 +31,13 @@ export interface RawPluginOptions {
   loader?: "text" | "base64" | "dataurl" | "file" | "binary" | "default";
 
   /**
-   * Extensions to be treated as text files.
+   * Map file extensions (without dot) to custom loaders.
+   * Example: { md: "text", png: "dataurl" }
    */
-  textExtensions?: string[];
+  customLoaders?: Record<string, "text" | "base64" | "dataurl" | "file" | "binary" | "default">;
 
   /**
-   * Extension name in case you are using some other extension with conflicting names.
+   * Plugin name override (for debugging, deduplication, etc.)
    */
   name?: string;
 }
@@ -54,8 +55,10 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
     const ext = options?.ext?.map(e => e.replace(/^\./, "")) ?? DEFAULT_EXT_ORDER_LIST;
 
     build.onResolve({ filter: /\?(raw|text|buffer|binary|base64|dataurl|file)$/ }, args => {
-      const query = args.path.split("?").pop();
-      const filepath = args.path.replace(new RegExp(`\\?${query}$`), "");
+      const i = args.path.lastIndexOf("?");
+      const filepath = i !== -1 ? args.path.slice(0, i) : args.path;
+      const query = i !== -1 ? args.path.slice(i + 1) : undefined;
+
       return {
         path: filepath,
         namespace: "raw",
@@ -111,20 +114,25 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
       return { contents: buffer, loader };
     });
 
-    if (options?.textExtensions?.length) {
-      build.onLoad(
-        {
-          filter: new RegExp(
-            `\\.(${options.textExtensions
-              .map(e => e.replace(/^\./, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-              .join("|")})$`,
-          ),
-        },
-        args => ({
-          contents: fs.readFileSync(args.path),
-          loader: "text",
-        }),
+    if (options?.customLoaders) {
+      const customLoaderKeys = Object.keys(options.customLoaders).sort(
+        (a, b) => b.length - a.length,
       );
+      const pattern = new RegExp(
+        `\\.(${customLoaderKeys
+          .map(e => e.replace(/^\./, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+          .join("|")})$`,
+      );
+
+      build.onLoad({ filter: pattern }, args => {
+        const path = args.path;
+        const loaderKey = customLoaderKeys.find(suffix => path.endsWith(suffix));
+        const loader = options.customLoaders?.[loaderKey ?? ""];
+        if (!loader) return;
+
+        const buffer = fs.readFileSync(path);
+        return { contents: buffer, loader };
+      });
     }
   },
 });
