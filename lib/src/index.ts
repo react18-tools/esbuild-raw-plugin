@@ -30,7 +30,7 @@ export interface RawPluginOptions {
  * extensions in order of priority and handling custom loaders.
  */
 export const raw: (options?: RawPluginOptions) => Plugin = options => ({
-  name: `raw-${Math.random().toString(36).slice(2, 10)}`,
+  name: `esbuild-raw-plugin`,
   setup(build: PluginBuild) {
     const ext = options?.ext ?? [
       "ts",
