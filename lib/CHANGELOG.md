@@ -1,5 +1,11 @@
 # esbuild-raw-plugin
 
+## 0.3.1
+
+### Patch Changes
+
+- 6959695: fix: backward compatibility - add support for and deprecate the deprecated textExtensions field in raw plugin options
+
 ## 0.3.0
 
 ### Minor Changes
