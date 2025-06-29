@@ -1,6 +1,6 @@
 {
   "name": "@repo/shared",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@testing-library/react": "^16.3.0",
-    "@types/node": "^24.0.4",
+    "@types/node": "^24.0.7",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",

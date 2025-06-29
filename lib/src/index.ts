@@ -40,6 +40,17 @@ export interface RawPluginOptions {
    * Plugin name override (for debugging, deduplication, etc.)
    */
   name?: string;
+
+  /**
+   * @deprecated Use `customLoaders` instead.
+   * Previously used to specify extensions to treat as text.
+   *
+   * Example replacement:
+   * ```ts
+   * customLoaders: { "module.scss": "text", "md": "text" }
+   * ```
+   */
+  textExtensions?: string[];
 }
 
 /**
@@ -112,10 +123,14 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
       return { contents: buffer, loader };
     });
 
-    if (options?.customLoaders) {
-      const customLoaderKeys = Object.keys(options.customLoaders).sort(
-        (a, b) => b.length - a.length,
-      );
+    if (options?.customLoaders || options?.textExtensions) {
+      const customLoaderKeys = [
+        ...new Set([
+          ...Object.keys(options.customLoaders ?? {}),
+          ...(options?.textExtensions ?? []),
+        ]),
+      ].sort((a, b) => b.length - a.length);
+
       const pattern = new RegExp(
         `\\.(${customLoaderKeys
           .map(e => e.replace(/^\./, "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
@@ -125,7 +140,10 @@ export const raw = (options?: RawPluginOptions): Plugin => ({
       build.onLoad({ filter: pattern }, args => {
         const path = args.path;
         const loaderKey = customLoaderKeys.find(suffix => path.endsWith(suffix));
-        const loader = options.customLoaders?.[loaderKey ?? ""];
+        let loader = options.customLoaders?.[loaderKey ?? ""];
+
+        if (!loader && options?.textExtensions?.includes(loaderKey ?? "")) loader = "text";
+
         if (!loader) return;
 
         const buffer = fs.readFileSync(path);

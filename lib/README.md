@@ -1,37 +1,48 @@
 # Esbuild Raw Plugin <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 40px"/>
 
-[![test](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/react18-tools/esbuild-raw-plugin/maintainability) [![codecov](https://codecov.io/gh/react18-tools/esbuild-raw-plugin/graph/badge.svg)](https://codecov.io/gh/react18-tools/esbuild-raw-plugin) [![Version](https://img.shields.io/npm/v/esbuild-raw-plugin.svg?colorB=green)](https://www.npmjs.com/package/esbuild-raw-plugin) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/esbuild-raw-plugin.svg)](https://www.npmjs.com/package/esbuild-raw-plugin) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/esbuild-raw-plugin) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![test](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/esbuild-raw-plugin/actions/workflows/test.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/aa896ec14c570f3bb274/maintainability)](https://codeclimate.com/github/react18-tools/esbuild-raw-plugin/maintainability)
+[![codecov](https://codecov.io/gh/react18-tools/esbuild-raw-plugin/graph/badge.svg)](https://codecov.io/gh/react18-tools/esbuild-raw-plugin)
+[![Version](https://img.shields.io/npm/v/esbuild-raw-plugin.svg?colorB=green)](https://www.npmjs.com/package/esbuild-raw-plugin)
+[![Downloads](https://img.jsdelivr.com/img.shields.io/npm/d18m/esbuild-raw-plugin.svg)](https://www.npmjs.com/package/esbuild-raw-plugin)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/esbuild-raw-plugin)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
-**An ESBuild/TSUP plugin to import files as raw text.**  
-Ideal for scenarios like importing code files for documentation, interactive tools like `react-live`, or other text-based use cases.
+**Lightweight ESBuild/TSUP plugin to import files as raw content — zero config required.**
 
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/react18-tools/esbuild-raw-plugin) and share it with your friends.
+> 🔌Import `.ts`, `.js`, `.css`, `.scss`, `.md`, `.html`, `.docx`, and more — perfect for documentation, live editors (`react-live`), markdown tooling, or template-driven workflows.
+> ⚡️Power users: Load `.docx` templates directly for [mdast2docx](https://github.com/md2docx/mdast2docx).
+
+> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/react18-tools/esbuild-raw-plugin) and share it with your dev circle.
 
 ---
 
-## Features
+## 🚀 Features
 
-- Import any file (e.g., `.js`, `.ts`, `.css`, etc.) as raw text.
-- Works seamlessly with **ESBuild** and **TSUP**.
-- Perfect for documentation generators, live code editors, and similar tools.
+> 🔥 Import any file as raw content with zero config in ESBuild or TSUP — text, base64, binary, docx templates & more!\
+> ⚡️ Fast, smart, and extensible → `esbuild-raw-plugin`
+
+- 🔧 Supports `?raw`, `?text`, `?base64`, `?dataurl`, `?binary`, and `?file` query suffixes
+- 🧠 Smart fallback to extensions like `.ts`, `.tsx`, `index.[ext]`, etc.
+- 🔍 Custom loader mapping (e.g., `module.scss` → `text`, `png` → `dataurl`)
+- ⚡ Ultra-fast using regex-based native `onLoad` filter (Go-native perf)
+- 🪶 Works seamlessly with both [Tsup](https://tsup.egoist.dev/) and [ESBuild](https://esbuild.github.io/)
 
 ---
 
-## Installation
-
-Using npm:
+## 📦 Installation
 
 ```bash
 npm install esbuild-raw-plugin --save-dev
 ```
 
-Using yarn:
+_or_
 
 ```bash
 yarn add esbuild-raw-plugin --dev
 ```
 
-Using pnpm:
+_or_
 
 ```bash
 pnpm add esbuild-raw-plugin --save-dev
@@ -39,13 +50,11 @@ pnpm add esbuild-raw-plugin --save-dev
 
 ---
 
-## Usage
+## 🛠 Usage
 
-### ESBuild Configuration
+### ➤ With ESBuild
 
-Add the plugin to your ESBuild configuration:
-
-```js
+```ts
 import { build } from "esbuild";
 import { raw } from "esbuild-raw-plugin";
 
@@ -57,11 +66,9 @@ build({
 });
 ```
 
-### TSUP Configuration
+### ➤ With TSUP
 
-Add the plugin to your TSUP configuration:
-
-```js
+```ts
 import { defineConfig } from "tsup";
 import { raw } from "esbuild-raw-plugin";
 
@@ -74,135 +81,141 @@ export default defineConfig({
 
 ---
 
-## IDE Setup for IntelliSense and Type Checking
+## 🧠 TypeScript Support
 
-Add the following to your declaration file. If you do not have one, create a `declarations.d.ts` file and add the following:
+Add this to your `declarations.d.ts` file:
 
-```typescript
+```ts
 declare module "*?raw" {
-  const value: string;
-  export default value;
+  const content: string;
+  export default content;
 }
 ```
 
-## Importing Files as Raw Text
+> For other suffixes (`?base64`, `?binary`, etc.), add similar declarations if needed.
 
-With the plugin enabled, you can import files as raw text directly:
+---
 
-```js
-import myCode from "./example.js?raw";
+## 📥 Importing Raw Files
 
-console.log(myCode);
-// Outputs the content of 'example.js' as a string.
+```ts
+import content from "./example.js?raw";
+
+console.log(content); // Entire file content as string or Buffer
 ```
 
-### Good News:
+### ✅ Simplified Imports
 
-With the latest update, you no longer need to specify the file extension explicitly.
+You don’t need to specify full filenames or extensions:
 
-```js
-import myCode from "./example?raw";
+```ts
+import code from "./utils?raw"; // Resolves to utils/index.ts, utils.js, etc.
 ```
 
-This works seamlessly! Additionally, if you're exporting from files like `index.tsx`, `index.jsx`, etc., you can simplify imports. For example, if your file path is `my-lib/index.ts`, you can import the raw content like this:
+Great for:
 
-```js
-import myCode from "./my-lib?raw";
-```
+- Library or folder-level imports
+- Auto-resolving `.ts`, `.tsx`, `.css`, `.scss`, etc.
 
-### Extension Options (Optional)
+---
+
+## ⚙️ Plugin Options
 
 ```ts
 export interface RawPluginOptions {
-  /**
-   * Extensions to check in order if the file does not exist.
-   * If it's a directory, the plugin will look for `dir/index.[ext]`.
-   * @defaultValue ["tsx", "ts", "jsx", "js", "mjs", "mts", "module.css", "module.scss", "css", "scss"]
-   *
-   * You can provide your own extensions to optimize build performance or extend the list based on your use case.
-   */
   ext?: string[];
-
-  /**
-   * Custom loader for file processing.
-   * @defaultValue "text"
-   */
   loader?: "text" | "base64" | "dataurl" | "file" | "binary" | "default";
-
-  /**
-   * Extensions to be treated as text files.
-   */
-  textExtensions?: string[];
+  customLoaders?: Record<string, "text" | "base64" | "dataurl" | "file" | "binary" | "default">;
+  name?: string;
 }
 ```
 
-### Supported File Types
+<details>
+<summary><strong>🔧 Option Details</strong></summary>
 
-You can use `?raw` with any file type, including:
+- `ext`: Extensions to resolve if the file or folder is missing. Defaults to common types like `ts`, `tsx`, `module.css`, etc.
+- `loader`: Default loader if no `?query` is specified. Usually `"text"`.
+- `customLoaders`: Per-extension loader mapping. Example:
 
-- `.js`, `.ts`, `.jsx`, `.tsx`
-- `.css`, `.scss`
-- `.html`
-- `.md`
-- and more!
+  ```ts
+  {
+    "module.scss": "text",
+    "png": "dataurl",
+    "docx": "file"
+  }
+  ```
+
+- `name`: Optional plugin name override for debugging or deduplication.
+
+</details>
 
 ---
 
-## Example Use Case
+## 🧪 Supported Query Loaders
 
-### Live Code Preview with `react-live`
+Import with query-based syntax:
 
-```jsx
-import React from "react";
+```ts
+import doc from "./readme.md?text";
+import logo from "./logo.png?base64";
+import wasm from "./core.wasm?binary";
+```
+
+| Query Suffix | Description                                        |
+| ------------ | -------------------------------------------------- |
+| `?raw`       | Uses the default loader (options.loader ?? "text") |
+| `?text`      | Loads file as UTF-8 text                           |
+| `?base64`    | Returns base64 string                              |
+| `?dataurl`   | Returns full data URL                              |
+| `?file`      | Emits file to output dir                           |
+| `?binary`    | Returns raw `Buffer`                               |
+
+---
+
+## 🧬 Use Case: Live Code Preview
+
+```tsx
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import exampleCode from "./example.js?raw";
 
-const App = () => (
-  <LiveProvider code={exampleCode}>
-    <LiveEditor />
-    <LiveError />
-    <LivePreview />
-  </LiveProvider>
-);
-
-export default App;
+export default function LiveDemo() {
+  return (
+    <LiveProvider code={exampleCode}>
+      <LiveEditor />
+      <LiveError />
+      <LivePreview />
+    </LiveProvider>
+  );
+}
 ```
 
 ---
 
-## Why Use `esbuild-raw-plugin`?
+## 🔍 Why Choose `esbuild-raw-plugin`?
 
-- Simplifies importing files as raw text for documentation and live previews.
-- Seamlessly integrates with modern build tools like ESBuild and TSUP.
-- Lightweight and easy to configure.
-
----
-
-## Keywords
-
-`esbuild`, `esbuild-plugin`, `tsup-plugin`, `raw-text-import`, `import-as-text`, `file-loader`, `react-live`, `documentation-tools`, `frontend-tooling`
+- ✅ Works out of the box — no config needed
+- 📁 Handles smart file resolution
+- 💬 Excellent developer experience
+- 🧩 Supports both query-based and extension-based mappings
+- 🧪 Stable, fast, and production-tested
 
 ---
 
-## Contributing
+## 🛠 Contributing
 
-Contributions are welcome!  
-Feel free to open issues or pull requests to improve the plugin.
-
----
-
-Let me know if you'd like further tweaks! 🚀
+PRs and ideas welcome!
+Open an issue or submit a pull request to help improve the plugin.
 
 ![Alt](https://repobeats.axiom.co/api/embed/1ae166ef108b33b36ceaa60be208a5dafce25c5c.svg "Repobeats analytics image")
 
 ---
 
-## License
+## 🧾 License
 
-This library is licensed under the MPL-2.0 open-source license.
+Licensed under the **MPL-2.0** open-source license.
 
-> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please enroll in [our courses](https://mayank-chaudhari.vercel.app/courses) or [sponsor](https://github.com/sponsors/mayank1513) our work.
+> <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Please consider [sponsoring](https://github.com/sponsors/mayank1513) or [joining a course](https://mayank-chaudhari.vercel.app/courses) to support this work.
 
-<hr />
+---
 
 <p align="center" style="text-align:center">with 💖 by <a href="https://mayank-chaudhari.vercel.app" target="_blank">Mayank Kumar Chaudhari</a></p>

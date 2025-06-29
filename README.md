@@ -10,14 +10,17 @@
 
 **Lightweight ESBuild/TSUP plugin to import files as raw content — zero config required.**
 
-> Import `.ts`, `.js`, `.css`, `.scss`, `.md`, `.html`, `.docx`, and more — perfect for documentation, live editors (`react-live`), markdown tooling, or template-driven workflows.
-> Power users: Load `.docx` templates directly for [mdast2docx](https://github.com/md2docx/mdast2docx).
+> 🔌Import `.ts`, `.js`, `.css`, `.scss`, `.md`, `.html`, `.docx`, and more — perfect for documentation, live editors (`react-live`), markdown tooling, or template-driven workflows.
+> ⚡️Power users: Load `.docx` templates directly for [mdast2docx](https://github.com/md2docx/mdast2docx).
 
 > <img src="https://raw.githubusercontent.com/mayank1513/mayank1513/main/popper.png" style="height: 20px"/> Star [this repository](https://github.com/react18-tools/esbuild-raw-plugin) and share it with your dev circle.
 
 ---
 
 ## 🚀 Features
+
+> 🔥 Import any file as raw content with zero config in ESBuild or TSUP — text, base64, binary, docx templates & more!\
+> ⚡️ Fast, smart, and extensible → `esbuild-raw-plugin`
 
 - 🔧 Supports `?raw`, `?text`, `?base64`, `?dataurl`, `?binary`, and `?file` query suffixes
 - 🧠 Smart fallback to extensions like `.ts`, `.tsx`, `index.[ext]`, etc.
