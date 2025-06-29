@@ -1,10 +1,17 @@
 # esbuild-raw-plugin
 
+## 0.3.1
+
+### Patch Changes
+
+- 6959695: fix: backward compatibility - add support for and deprecate the deprecated textExtensions field in raw plugin options
+
 ## 0.3.0
 
 ### Minor Changes
 
 - a899336: ### ✨ Enhancements
+
   - Replaced `textExtensions` with `customLoaders` for fine-grained extension-to-loader mapping.
   - Introduced `name` option for overriding the plugin name (useful for debugging or deduplication).
   - Added support for multiple query-based loaders: `?text`, `?base64`, `?dataurl`, `?file`, `?binary`.
@@ -12,6 +19,7 @@
   - Regex-based `onLoad` filtering boosts performance (leveraging Go-native ESBuild internals).
 
   ### 🛠 Internal Refactors
+
   - Code refactored for better readability and maintainability.
   - Error messages are now clearer and more actionable.
   - Switched to consistent plugin naming (`"esbuild-raw-plugin"` instead of randomized suffix).

@@ -100,6 +100,7 @@ describe("Raw plugin", () => {
     const plugin = raw({ name: "custom-plugin-name" });
     expect(plugin.name).toBe("custom-plugin-name");
   });
+
   test("custom loader", async ({ expect }) => {
     await esbuild.build({
       ...buildOptions,
@@ -110,5 +111,18 @@ describe("Raw plugin", () => {
     // @ts-ignore
     const generatedCodeContent = (await import("./dist/test-loader.js")).getText();
     expect(generatedCodeContent).toBe(fileContent.toString("base64"));
+  });
+
+  test("deprecated textExtensions", async ({ expect }) => {
+    await esbuild.build({
+      ...buildOptions,
+      plugins: [raw({ textExtensions: ["md"] })],
+      entryPoints: [path.resolve(__dirname, "test3.ts")],
+      outdir: "__tests__/dist3",
+    });
+    const fileContent = fs.readFileSync(path.resolve(__dirname, "test.md"), "utf-8");
+    // @ts-ignore
+    const generatedCodeContent = (await import("./dist3/test3.js")).getText();
+    expect(generatedCodeContent).toBe(fileContent);
   });
 });
