@@ -82,7 +82,7 @@ importers:
         version: 0.0.5(@types/react@19.1.8)(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(@babel/core@7.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
       webgl-generative-particles:
         specifier: ^0.0.1
         version: 0.0.1(@types/react@19.1.8)(react@19.1.0)
@@ -131,7 +131,7 @@ importers:
         version: 0.0.5(@types/react@19.1.8)(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(@babel/core@7.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
       react18-themes:
         specifier: ^3.2.0
         version: 3.2.0(@types/react@19.1.8)(next@15.3.5(@babel/core@7.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
@@ -203,8 +203,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       eslint-plugin-storybook:
-        specifier: ^9.0.15
-        version: 9.0.15(eslint@9.11.1)(storybook@9.0.8(@testing-library/dom@10.4.0)(prettier@3.6.2))(typescript@5.8.3)
+        specifier: ^9.0.16
+        version: 9.0.16(eslint@9.11.1)(storybook@9.0.8(@testing-library/dom@10.4.0)(prettier@3.6.2))(typescript@5.8.3)
 
   packages/config-typescript: {}
 
@@ -233,7 +233,7 @@ importers:
         version: 4.1.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react18-loaders:
         specifier: ^1.1.4
-        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(@babel/core@7.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
+        version: 1.1.4(@types/react@19.1.8)(next@15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2661,12 +2661,12 @@ packages:
     peerDependencies:
       eslint: ^8.0.0
 
-  eslint-plugin-storybook@9.0.15:
-    resolution: {integrity: sha512-HKQtF90khC45uLJhsrMasgaH1Ou+TLzwnuFHDoHDVLryg6yIXRgSTXqRUwge9x6iitEYwUz5Y2YMqg92yzmyQQ==}
+  eslint-plugin-storybook@9.0.16:
+    resolution: {integrity: sha512-A9kJaYBGYswo11t9coo1rpY5i8qPJx9JX5/6YWK3L3zT9lCxJWkYFAed/1Jt92yk7EkOzLrwrIIjMj/+7erlgw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       eslint: ^8.0.0
-      storybook: ^9.0.15
+      storybook: ^9.0.16
 
   eslint-plugin-testing-library@6.5.0:
     resolution: {integrity: sha512-Ls5TUfLm5/snocMAOlofSOJxNN0aKqwTlco7CrNtMjkTdQlkpSMaeTCDHCuXfzrI97xcx2rSCNeKeJjtpkNC1w==}
@@ -8376,7 +8376,7 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-storybook@9.0.15(eslint@9.11.1)(storybook@9.0.8(@testing-library/dom@10.4.0)(prettier@3.6.2))(typescript@5.8.3):
+  eslint-plugin-storybook@9.0.16(eslint@9.11.1)(storybook@9.0.8(@testing-library/dom@10.4.0)(prettier@3.6.2))(typescript@5.8.3):
     dependencies:
       '@typescript-eslint/utils': 8.36.0(eslint@9.11.1)(typescript@5.8.3)
       eslint: 9.11.1
@@ -10745,7 +10745,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react18-loaders@1.1.4(@types/react@19.1.8)(next@15.3.5(@babel/core@7.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0):
+  react18-loaders@1.1.4(@types/react@19.1.8)(next@15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.2))(react@19.1.0):
     dependencies:
       '@types/react': 19.1.8
       r18gs: 2.1.0(@types/react@19.1.8)(react@19.1.0)
