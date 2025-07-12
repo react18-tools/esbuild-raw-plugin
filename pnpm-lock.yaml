@@ -304,8 +304,8 @@ packages:
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
 
-  '@asamuzakjp/dom-selector@6.5.1':
-    resolution: {integrity: sha512-MxVwEYQUGGtTHl1dp9u3ATVNRYFLy1+A1qLZxmoJAUbdDjdLMVu6WkprEYXVPMZkmSCryg3DGLfL0B0wc5p7QQ==}
+  '@asamuzakjp/dom-selector@6.5.2':
+    resolution: {integrity: sha512-1D57++NcnWt8bqurtVXLQcaNevrC2yFCWhPL/cPvf/IaQYRupxMDpHzjff5zRLDDmOdbip/txQlipW0DaM+D/A==}
 
   '@asamuzakjp/nwsapi@2.3.9':
     resolution: {integrity: sha512-n8GuYSrI9bF7FFZ/SjhwevlHc8xaVlb/7HmHelnc/PZXBD2ZR49NnN9sMMuDdEGPeeRQ5d0hqlSlEpgCX3Wl0Q==}
@@ -5627,7 +5627,7 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
 
-  '@asamuzakjp/dom-selector@6.5.1':
+  '@asamuzakjp/dom-selector@6.5.2':
     dependencies:
       '@asamuzakjp/nwsapi': 2.3.9
       bidi-js: 1.0.3
@@ -9645,7 +9645,7 @@ snapshots:
 
   jsdom@27.0.0-beta.0:
     dependencies:
-      '@asamuzakjp/dom-selector': 6.5.1
+      '@asamuzakjp/dom-selector': 6.5.2
       cssstyle: 4.6.0
       data-urls: 5.0.0
       decimal.js: 10.6.0
