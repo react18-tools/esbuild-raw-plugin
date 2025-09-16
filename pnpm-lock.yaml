@@ -82,7 +82,7 @@ importers:
         version: 0.0.5(@types/react@19.1.13)(react@19.1.1)
       react18-loaders:
         specifier: ^1.1.7
-        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(@babel/core@7.28.4)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
+        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
       webgl-generative-particles:
         specifier: ^0.0.1
         version: 0.0.1(@types/react@19.1.13)(react@19.1.1)
@@ -131,7 +131,7 @@ importers:
         version: 0.0.5(@types/react@19.1.13)(react@19.1.1)
       react18-loaders:
         specifier: ^1.1.7
-        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(@babel/core@7.28.4)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
+        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
       react18-themes:
         specifier: ^3.2.0
         version: 3.2.0(@types/react@19.1.13)(next@15.5.3(@babel/core@7.28.4)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
@@ -233,7 +233,7 @@ importers:
         version: 4.1.8(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react18-loaders:
         specifier: ^1.1.7
-        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(@babel/core@7.28.4)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
+        version: 1.1.7(@types/react@19.1.13)(next@15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2370,8 +2370,8 @@ packages:
     resolution: {integrity: sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==}
     engines: {node: '>=8'}
 
-  detect-indent@7.0.1:
-    resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
+  detect-indent@7.0.2:
+    resolution: {integrity: sha512-y+8xyqdGLL+6sh0tVeHcfP/QDd8gUgbasolJJpY7NgeQGSZ739bDtSiaiDgtoicy+mtYB81dKLxO9xRhCyIB3A==}
     engines: {node: '>=12.20'}
 
   detect-libc@1.0.3:
@@ -7860,7 +7860,7 @@ snapshots:
 
   detect-indent@6.1.0: {}
 
-  detect-indent@7.0.1: {}
+  detect-indent@7.0.2: {}
 
   detect-libc@1.0.3:
     optional: true
@@ -10580,7 +10580,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react18-loaders@1.1.7(@types/react@19.1.13)(next@15.5.3(@babel/core@7.28.4)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1):
+  react18-loaders@1.1.7(@types/react@19.1.13)(next@15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.92.1))(react@19.1.1):
     dependencies:
       '@types/react': 19.1.13
       r18gs: 3.0.1(@types/react@19.1.13)(react@19.1.1)
@@ -10945,7 +10945,7 @@ snapshots:
 
   sort-package-json@3.4.0:
     dependencies:
-      detect-indent: 7.0.1
+      detect-indent: 7.0.2
       detect-newline: 4.0.1
       git-hooks-list: 4.1.1
       is-plain-obj: 4.1.0
